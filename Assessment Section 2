@@ -1,0 +1,24 @@
+x <- c(2, 43, 27, 96, 18)
+rank(x) #1, 4, 3, 5, 2 --> shows the number in the ranking of x 
+sort(x) #sorts elements by their size
+order(x) #
+
+min(x) #returns smallest number
+which.min(x) #returns index of smallest number
+max(x) #returns biggest number
+which.max(x) #returns index of biggest number
+
+
+#Mandi, Amy, Nicole, and Olivia all ran different distances 
+#in different time intervals. Their distances (in) and times 
+#(in minutes) are as follows:
+
+name <- c("Mandi", "Amy", "Nicole", "Olivia")
+distance <- c(0.8, 3.1, 2.8, 4.0)
+time_min <- c(10, 30, 40, 50)
+
+time_h <- time_min/60
+speed <- distance/time_h
+
+df_run <- data.frame(name = name, time = time_h, distance = distance, speed = speed)
+print(df_run)
