@@ -1,0 +1,25 @@
+#quadratic formula
+a <- 2
+b <- -1
+c <- -4
+solution_1 <- (-b + sqrt(b^2 - 4*a*c))/(2*a)
+solution_2 <- (-b - sqrt(b^2 - 4*a*c))/(2*a)
+
+#To compute log base 4 of 1024, execute the following function:
+log(1024, base=4)
+
+#exploring movielens dataset in dslabs
+library(dslabs)
+data("movielens")
+
+str(movielens)
+#number of rows: 100004
+#different variables: 7
+
+class(movielens$title)
+#character chr variable
+
+class(movielens$genres)
+#factor Factor variable
+
+nlevels(movielens$genres)
