@@ -1,0 +1,113 @@
+library(dslabs)
+library(dplyr)
+data(heights)
+options(digits = 3)
+
+#First, determine the average height in this dataset. 
+#Then create a logical vector ind with the indices for those individuals who are 
+#above average height.
+
+#How many individuals in the dataset are above average height?
+str(heights)
+avg <- mean(heights$height)
+
+ind <- sort(heights$height > avg)
+sum(ind)
+
+#How many individuals in the dataset are above average height and are female?
+sex_ind <- sort(heights$sex == "Female")
+ab_avg_f <- sum(ind & sex_ind)
+sum(ab_avg_f)
+filter(heights, sex == "Female" & height > avg)
+#31 individuals are above avg height female
+
+#What proportion of individuals in the dataset are female?
+#total count of entries: 1050 
+female <- sort(heights$sex == "Female")
+female_total <- sum(female)
+female_proportion <- female_total/1050
+print(female_proportion)
+#correct answer: using mean() on female subset
+#mean(heights$sex == "Female")
+
+#Question4
+#Determine the minimum height in the heights dataset.
+min_height <- min(heights$height)
+
+#Use the match() function to determine the index of the first individual with the 
+#minimum height.
+help(match)
+match(min_height, heights$height)
+#answer: 1032
+
+#Subset the sex column of the dataset by the index in 4b to determine the 
+#individual’s sex.
+heights$sex[1032]
+#ans: Male
+
+#Question 5
+#Question 5a: Determine the maximum height
+max_height <- max(heights$height)
+print(max_height)
+#ans: 82.7
+
+#Which integer values are between the maximum and minimum heights? For example, 
+#if the minimum height is 10.2 and the maximum height is 20.8, your answer should
+#be x <- 11:20 to capture the integers in between those values. (If either 
+#the maximum or minimum height are integers, include those values too.)
+
+#Write code to create a vector x that includes the integers between the minimum 
+#and maximum heights in this dataset (as numbers).
+
+x <- heights$height %in% 49:83
+sum(!x)
+
+
+#Question 6 
+#Using the heights dataset, create a new column of heights in centimeters named 
+#ht_cm. Recall that 1 inch = 2.54 centimeters. Save the resulting dataset as 
+#heights2.
+
+ht_cm <- heights$height*2.54 
+heights2 <- mutate(heights, ht_cm = ht_cm)
+heights2$ht_cm[18]
+
+#What is the mean height in centimeters?
+mean(heights2$ht_cm)
+
+#Create a data frame females by filtering the heights2 data to contain only female
+#individuals.
+female <- filter(heights2, sex == "Female")
+head(female)
+
+#How many females are in the heights2 dataset?
+str(female)
+#nrow(females)
+
+#mean height of females in cm 
+mean(female$ht_cm)
+
+#Question 8 
+#The olive dataset in dslabs contains composition in percentage of eight fatty 
+#acids found in the lipid fraction of 572 Italian olive oils:
+data(olive)
+head(olive)
+
+#Plot the percent palmitic acid versus palmitoleic acid in a scatterplot. 
+#What relationship do you see?
+
+plot(olive$palmitic, olive$palmitoleic)
+#ans: positive linear relationship
+
+#Question 9 
+#Create a histogram of the percentage of eicosenoic acid in olive.
+#Which of the following is true? 
+hist(olive$eicosenoic)
+#The most common value of eicosenoic acid is below 0.05%
+
+#Question 10 
+#Make a boxplot of palmitic acid percentage in olive with separate distr. for 
+#each region
+#Which region has the highest median palmitic acid percentage? 
+boxplot(palmitic~region, data = olive)
+help(boxplot)
