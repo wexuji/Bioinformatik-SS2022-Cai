@@ -10,8 +10,8 @@ seq <- as.data.frame(seq) #Umwandeln in Data Frame
 #Umwandlen der Daten als Schleife -------------------
 
 for(i in 1:ncol(seq)){
-  temp <- strsplit(seq[[a]], "")
-  assign(paste0("seq",a), temp)
+  temp <- strsplit(seq[[i]], "")
+  assign(paste0("seq",i), temp)
   rm(temp)
 }
 rm(i)
